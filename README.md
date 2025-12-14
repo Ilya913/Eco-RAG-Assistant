@@ -30,6 +30,8 @@ Unlike simple RAG wrappers, this project focuses on **data quality** (using Docl
 4.  **Generation:** Context + Query are sent to the LLM (`gemma2` / `qwen2.5`) to generate a concise answer.
 5.  **Response:** User receives the answer with references to specific lecture pages.
 
+> ⚠️ **Important:** All commands listed below must be executed from the **project root directory** (the folder containing `src/`, `data/`, and `.env`). Do not navigate inside the `src` folder.
+
 ## 📚 Knowledge Base Management
 
 The bot relies on a **FAISS** vector database stored in the `db/` directory. The ingestion pipeline is incremental (it only processes new files).
@@ -39,7 +41,7 @@ The bot relies on a **FAISS** vector database stored in the `db/` directory. The
 1.  Put your PDF files into the `data/` directory.
 2.  Run the ingestion script:
     ```bash
-    python src/update_vector_db.py
+    python -m src.update_vector_db
     ```
 
 **What happens next:**
@@ -96,7 +98,7 @@ The bot relies on a **FAISS** vector database stored in the `db/` directory. The
 6.  **Run the Bot**
     Make sure Ollama is running (`ollama serve`).
     ```bash
-    python src/bot.py
+    python -m src.bot
     ```
 
 ## 🧪 Evaluation (Ragas)
@@ -105,7 +107,7 @@ To ensure the quality of answers, I implemented a testing pipeline located in `t
 
 Run evaluation:
 ```bash
-python tests/test.py
+python -m tests.test 
 ```
 
 *Metrics used: Faithfulness, Answer Relevancy.*
