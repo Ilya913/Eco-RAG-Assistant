@@ -34,6 +34,7 @@ Unlike simple RAG wrappers, this project focuses on **data quality** (using Docl
 
 ## 📚 Knowledge Base Management
 > ⚠️ **Important:** All commands listed below must be executed from the **project root directory** (the folder containing `src/`, `data/`, and `.env`). Do not navigate inside the `src` folder.
+
 The bot relies on a **FAISS** vector database stored in the `db/` directory. The ingestion pipeline is incremental (it only processes new files).
 
 **To add new documents:**
@@ -103,6 +104,7 @@ The bot relies on a **FAISS** vector database stored in the `db/` directory. The
 
 ## 🧪 Evaluation (Ragas)
 > ⚠️ **Important:** All commands listed below must be executed from the **project root directory** (the folder containing `src/`, `data/`, and `.env`). Do not navigate inside the `src` folder.
+
 To ensure the quality of answers, I implemented a testing pipeline located in `tests/test.py`. It evaluates the RAG chain against a ground truth dataset.
 
 Run evaluation:
