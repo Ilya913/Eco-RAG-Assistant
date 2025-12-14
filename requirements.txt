@@ -1,0 +1,12 @@
+aiogram
+langchain
+langchain-community
+langchain-ollama
+langchain-text-splitters
+faiss-cpu
+python-dotenv
+docling
+ragas
+datasets
+pandas
+openpyxl
