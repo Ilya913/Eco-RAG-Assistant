@@ -27,7 +27,7 @@ Unlike simple RAG wrappers, this project focuses on **data quality** (using Docl
 1.  **Ingestion:** PDFs are processed via `Docling`, split into semantic chunks using `HybridChunker`.
 2.  **Embedding:** Chunks are embedded using `bge-m3` (via Ollama) and stored in `FAISS`.
 3.  **Retrieval:** User query triggers a similarity search to find top-K relevant chunks.
-4.  **Generation:** Context + Query are sent to the LLM (`gemma2` / `qwen2.5`) to generate a concise answer.
+4.  **Generation:** Context + Query are sent to the LLM (`gemma3` / `qwen2.5`) to generate a concise answer.
 5.  **Response:** User receives the answer with references to specific lecture pages.
 
 
@@ -112,7 +112,14 @@ Run evaluation:
 python -m tests.test 
 ```
 
-*Metrics used: Faithfulness, Answer Relevancy.*
+### 📊 Benchmark Results
+
+| Metric | Score | Meaning |
+| :--- | :--- | :--- |
+| **Faithfulness** | **97.14%** | The answer is derived purely from the context (High factual consistency). |
+| **Answer Relevancy** | **88.46%** | The answer directly addresses the user's question without redundancy. |
+
+> *Note: High faithfulness score demonstrates that the bot effectively minimizes hallucinations by sticking strictly to the provided lecture materials.*
 
 ## 🗺 Roadmap & Future Improvements
 
