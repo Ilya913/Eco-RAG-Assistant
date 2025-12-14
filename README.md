@@ -30,6 +30,24 @@ Unlike simple RAG wrappers, this project focuses on **data quality** (using Docl
 4.  **Generation:** Context + Query are sent to the LLM (`gemma2` / `qwen2.5`) to generate a concise answer.
 5.  **Response:** User receives the answer with references to specific lecture pages.
 
+## 📚 Knowledge Base Management
+
+The bot relies on a **FAISS** vector database stored in the `db/` directory. The ingestion pipeline is incremental (it only processes new files).
+
+**To add new documents:**
+
+1.  Put your PDF files into the `data/` directory.
+2.  Run the ingestion script:
+    ```bash
+    python src/update_vector_db.py
+    ```
+
+**What happens next:**
+*   **Docling** parses the new PDFs (preserving tables and headers).
+*   **HybridChunker** splits the text into semantic parts.
+*   **Ollama (bge-m3)** generates embeddings.
+*   The **FAISS** index is updated and saved locally.
+
 ## 🏃‍♂️ How to Run
 
 ### Prerequisites
@@ -63,8 +81,19 @@ Unlike simple RAG wrappers, this project focuses on **data quality** (using Docl
     ```env
     BOT_TOKEN=your_telegram_bot_token
     ```
+5.  **Pull Ollama Models**
+    The project relies on specific local models. Run these commands to download them:
+    ```bash
+    # Embedding model (Required for Vector DB)
+    ollama pull bge-m3
 
-5.  **Run the Bot**
+    # Evaluation Judge (Required for Ragas tests)
+    ollama pull qwen2.5:7b
+
+    # Main Chat Model
+    ollama pull gemma3:4b
+    ```
+6.  **Run the Bot**
     Make sure Ollama is running (`ollama serve`).
     ```bash
     python src/bot.py
